@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- <style>
+        *, body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .form-holder {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .form-holder .form-content {
+            position: relative;
+            text-align: center;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-align-items: center;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .form-content .form-items {
+            border: 3px solid #fff;
+            padding: 40px;
+            display: inline-block;
+            width: 100%;
+            min-width: 540px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            text-align: left;
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+        }
+
+        .form-content h3 {
+            color: #fff;
+            text-align: left;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-content h3.form-title {
+            margin-bottom: 30px;
+        }
+
+        .form-content p {
+            color: #fff;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 300;
+            line-height: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label {
+            color: #fff;
+        }
+
+        .form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+            width: 100%;
+            padding: 9px 20px;
+            text-align: left;
+            border: 0;
+            outline: 0;
+            border-radius: 6px;
+            background-color: #fff;
+            font-size: 15px;
+            font-weight: 300;
+            color: #8D8D8D;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+        }
+
+        .btn-primary {
+            outline: none;
+            border: 0px;
+            box-shadow: none;
+        }
+
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+            outline: none !important;
+            border: none !important;
+            box-shadow: none;
+        }
+
+        form {
+            background-color: #89cdef;
+            width: 500px;
+            height: 300px;
+            padding: 50px;
+            border: 1px white solid;
+            border-radius: 10px;
+        }
+
+        .form-content textarea {
+            position: static !important;
+            width: 100%;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-align: left;
+            background-color: #fff;
+            border: 0;
+            font-size: 15px;
+            font-weight: 300;
+            color: #8D8D8D;
+            outline: none;
+            resize: none;
+            height: 120px;
+            -webkit-transition: none;
+            transition: none;
+            margin-bottom: 14px;
+        }
+
+        .form-content textarea:hover, .form-content textarea:focus {
+            border: 0;
+            background-color: #ebeff8;
+            color: #8D8D8D;
+        }
+
+        .mv-up {
+            margin-top: -9px !important;
+            margin-bottom: 8px !important;
+        }
+
+        .invalid-feedback {
+            color: #ff606e;
+        }
+
+        .valid-feedback {
+            color: #2acc80;
+        }
+
+        a:link {
+            color: white;
+            text-decoration: none;
+        }
+
+        .dashboard-box {
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            margin: 10px auto;
+            max-width: 300px;
+        }
+
+        #sdw {
+            text-shadow: 2px 2px 2px rgb(60, 55, 55);
+        }
+
+        .dashboard-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-box.courses {
+            background-color: #0ccf23;
+        }
+
+        .dashboard-box.faculty {
+            background-color: #a72898;
+        }
+
+        .dashboard-box.feedback {
+            background-color: #100ce0;
+        }
+
+        .dashboard-box.enroll {
+            background-color: #ff07cd;
+        }
+
+        .sidebar {
+            position: fixed;
+            min-height: 100vh;
+            background-color: #f6f5f6;
+            padding-top: 20px;
+        }
+
+        .sidebar .nav-link {
+            color: black;
+            font-size: 1.1em;
+        }
+
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #aaaaaa;
+        }
+
+        .col-md-4 {
+            padding-top: 100px;
+        }
+
+        #post {
+            background-color: #f8f5f5;
+            box-shadow: 3px 3px 3px 3px inset grey;
+        }
+
+        #post:active {
+            background-color: #f6f5f6;
+        }
+
+        footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 1;
+        }
+    </style> -->
+</head>
+<body>
+    <div style="padding-top: 130px;">
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; top: 0; width: 100%; z-index: 9999;">
+            <p><img alt="Logo" src="../static/uploads/logo.png" style="height: 100px;width:170px;"><span id="sdw" style="color: rgba(171, 234, 175, 0.973); font-size: 40px;"> <b>NET FRIENDS</b></span></p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="nav" class="col-md-3 col-lg-2 d-md-block sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('Profile') }}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('posts', page=1) }}">Newsfeed</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('myposts') }}">Post Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_templates') }}">Search user</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_template') }}">Search post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <h1 class="text-center mt-4">Create Post</h1>
+                <div class="container mt-7 mb-7 p- d-flex justify-content-center">
+                    <div class="form-content">
+                        <div class="form-items">
+                            <h3>Post Today</h3>
+                            <form action="{{ url_for('createpost') }}" method="post" enctype="multipart/form-data" class="requires-validation">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" name="content" placeholder="Enter your title" required>
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <textarea class="form-control" type="text" name="feed" rows="4" placeholder="Enter your content" required></textarea>
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+
+                                <div class="col-md-12">
+                                    <input class="form-control" type="file" name="media" placeholder="Upload">
+                                </div>
+                                <div class="form-button mt-3">
+                                    <input type="submit" class="btn btn-primary" value="Create Post"><br>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; NET Friends. Amplify Your Influence.</p>
+        </div>
+    </footer>
+</body>
+</html>

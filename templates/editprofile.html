@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fdfdfd;
+        }
+
+        .card {
+            width: 450px;
+            background-color: #89cdef;
+            border: none;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        .image img {
+            transition: all 0.5s;
+        }
+
+        .card:hover .image img {
+            transform: scale(1.5);
+        }
+
+        .btn {
+            height: 40px;
+            width: 150px;
+        }
+
+        .name {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .idd {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .idd1 {
+            font-size: 12px;
+        }
+
+        .number {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .follow {
+            font-size: 12px;
+            font-weight: 500;
+            color: #444444;
+        }
+
+        .btn1 {
+            height: 40px;
+            width: 150px;
+            border: none;
+            background-color: #000;
+            color: #aeaeae;
+            font-size: 15px;
+        }
+
+        .text span {
+            font-size: 13px;
+            color: #545454;
+            font-weight: 500;
+        }
+
+        .icons i {
+            font-size: 19px;
+        }
+
+        hr .new1 {
+            border: 1px solid;
+        }
+
+        .join {
+            font-size: 14px;
+            color: #a0a0a0;
+            font-weight: bold;
+        }
+
+        .date {
+            background-color: #ccc;
+        }
+
+        .dashboard-box {
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            margin: 10px auto;
+            max-width: 300px;
+        }
+
+        #sdw {
+            text-shadow: 2px 2px 2px rgb(60, 55, 55);
+        }
+
+        .dashboard-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-box.courses {
+            background-color: #0ccf23;
+        }
+
+        .dashboard-box.faculty {
+            background-color: #a72898;
+        }
+
+        .dashboard-box.feedback {
+            background-color: #100ce0;
+        }
+
+        .dashboard-box.enroll {
+            background-color: #ff07cd;
+        }
+
+        .sidebar {
+            position: fixed;
+            min-height: 100vh;
+            background-color: #f6f5f6;
+            padding-top: 20px;
+        }
+
+        .sidebar .nav-link {
+            color: black;
+            font-size: 1.1em;
+        }
+
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #aaaaaa;
+        }
+
+        .col-md-4 {
+            padding-top: 100px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        #post {
+            background-color: #f8f5f5;
+            box-shadow: 3px 3px 3px 3px inset grey;
+        }
+
+        #post:active {
+            background-color: #f6f5f6;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            z-index: 1;
+        }
+    </style> -->
+</head>
+<body>
+    <div style="padding-top: 130px;">
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; top: 0; width: 100%; z-index: 9999;">
+            <p><img src="../static/uploads/logo.png" style="height: 100px;width:170px;"><span id="sdw" style="color: rgba(171, 234, 175, 0.973); font-size: 40px;"> <b>NET FRIENDS</b></span></p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="nav" class="col-md-3 col-lg-2 d-md-block sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('Profile') }}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('posts', page=1) }}">Newsfeed</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('myposts') }}">Post Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_templates') }}">Search user</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_template') }}">Search post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <h1 class="text-center mt-4">Edit Your Profile</h1>
+                <div class="container mt-7 mb-7 p- d-flex justify-content-center">
+                    <div class="form-content">
+                        <div class="form-items">
+                            <form action="{{ url_for('editprofile', id=session['userid']) }}" method="post" class="requires-validation" novalidate enctype="multipart/form-data">
+                                <div class="col-md-12">
+                                    <label for="name">Name : </label>
+                                    <input class="form-control" type="text" name="name" placeholder="Enter your name" value="{{ user.username }}" required>
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <label for="email">Email : </label>
+                                    <input class="form-control" type="email" name="email" placeholder="Enter your Email" value="{{ user.Email }}" required>
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <label for="password">Password : </label>
+                                    <input class="form-control" type="password" name="password" placeholder="Enter your Password" value="{{ user.password }}" required>
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <label for="place">Location : </label>
+                                    <input class="form-control" type="text" name="place" placeholder="Enter Your Location"required value="{{ user.place }}">
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" name="text" placeholder="Enter your Text"required value="{{ user.text }}">
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <label for="media">Photo : </label>
+                                    <input class="form-control" type="file" name="media" placeholder="upload">
+                                </div>
+                                <div class="form-button mt-3">
+                                    <input type="submit" class="btn btn-primary" value="Edit"><br>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer  >
+        <div class="container">
+            <p>&copy; NET Friends. Amplify Your Influence.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+</body>
+</html>

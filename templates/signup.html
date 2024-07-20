@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .header{
+            width: 500px
+        }
+
+        .header h1 {
+            margin: 0;
+            padding-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .textbox {
+            width: calc(100% - 100px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .msg {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .bottom {
+            margin-top: 20px;
+        }
+
+        .bottom a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .bottom a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1 class="word">Register</h1>
+        </div>
+        <form action="{{ url_for('signup') }}" method="post">
+            <div class="msg">{{ msg }}</div>
+            <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox" /><br><br>
+            <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox" /><br><br>
+            <input id="email" name="email" type="text" placeholder="Enter Your Email ID" class="textbox" /><br><br>
+            <div class="col-md-12">
+                <input class="form-control" type="file" name="media" placeholder="upload">
+            </div>
+            <input type="submit" class="btn" value="Sign Up"><br>
+        </form>
+        <p class="bottom">Already have an account? <a href="{{ url_for('login') }}">Sign In here</a></p>
+    </div>
+</body>
+</html>

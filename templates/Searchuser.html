@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Searchuser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            background-color: #fdfdfd;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .card {
+            width: 450px;
+            background-color: #89cdef;
+            border: none;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        .image img {
+            transition: all 0.5s
+        }
+
+        .card:hover .image img {
+            transform: scale(1.5)
+        }
+
+        .btn-secondary {
+            height: 140px;
+            width: 140px;
+            border-radius: 50%
+        }
+
+        #sdw {
+            text-shadow: 2px 2px 2px rgb(60, 55, 55);
+        }
+        
+        .sidebar {
+            position: fixed;
+            min-height: 100vh;
+            background-color: #f6f5f6;
+            padding-top: 20px;
+        }
+
+        .sidebar .nav-link {
+            color: black;
+            font-size: 1.1em;
+        }
+
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            width: 80%;
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #aaaaaa;
+        }
+
+        .col-md-4 {
+            padding-top: 100px;
+        }
+
+        h2 {
+            color: #6e860d;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #aaaaaa;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        #post {
+            background-color: #f8f5f5;
+            box-shadow: 3px 3px 3px 3px inset grey;
+        }
+
+        #post:active {
+            background-color: #f6f5f6;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0px;
+            z-index: 1;
+        }
+    </style> -->
+    <style>
+         .card {
+    width: 450px;
+    background-color: #89cdef;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.image img {
+    transition: all 0.5s;
+}
+
+.card:hover .image img {
+    transform: scale(1.5);
+}
+    </style>
+</head>
+<body>
+    <div style="padding-top: 130px;">
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; top: 0; width: 100%; z-index: 9999;">
+            <p><img src="../static/uploads/logo.png" style="height: 100px;width:170px;"><span id="sdw" style="color: rgba(171, 234, 175, 0.973); font-size: 40px;"> <b>NET FRIENDS</b></span></p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="nav" class="col-md-3 col-lg-2 d-md-block sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('Profile') }}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('posts', page=1) }}">Newsfeed</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('myposts') }}">Post Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('search_templates') }}">Search user</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_template') }}">Search post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+            <main role="main" class=" col-lg-10 px-md-4 main-content">
+                <h1 class="text-center mt-4">Search by Post or Username</h1>
+                <form action="{{ url_for('search_user') }}" method="get">
+                    <div class="msg">{{ msg }}</div>
+                    <input id="name" name="name" type="text" placeholder="Enter Username " class="textbox" />
+                    <input type="submit"style="margin-left: 30px" class="btn btn-success" value="Submit"><br><br>
+                </form>
+                
+                <article class=" row justify-content-center align-items-center" >
+                {% if flag != 'T' %}
+                {% if data %}
+                {% for user in data %}
+                        <div class="card p-4 col-md-6" style="width:350px;margin-right: 75px;margin-left: 75px;">
+                            <div class="image d-flex flex-column justify-content-center align-items-center">
+                                <button class="btn btn-secondary">
+                                    {% if user.photo %}
+                                        <img class="rounded-2" src="{{ url_for('static', filename='uploads/' + user.photo.split('/')[-1]) }}" alt="image" height="100" width="100" />
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='uploads/download (7).jpeg') }}" alt="default image" height="100" width="100" />
+                                    {% endif %}
+                                </button>
+                                <h3 class="name mt-3">{{ user.username }}</h3>
+                                <span class="idd">@{{ user.email }}</span>
+                                <div class="d-flex flex-row justify-content-center align-items-center gap-2">
+                                    <span class="idd1">{{ user.text }}</span> <span><i class="fa fa-copy"></i></span>
+                                </div>
+                                <div class="d-flex flex-row justify-content-center align-items-center mt-3">
+                                    <span class="number">{{ user.followers }} <span class="follow">Followers</span></span>
+                                </div>
+                                <div class="d-flex mt-2">
+                                    <button class="follow-button btn btn-primary {{ 'btn-following' if user.is_following else '' }}" 
+                                                    data-userid="{{ user.userid }}">
+                                                {{ 'Following' if user.is_following else 'Follow' }}
+                                            </button></div>
+                                <div class="px-2 rounded mt-2 date">
+                                    <p>Created at : <strong>{{ user.createdat }}</strong></p>
+                                </div>
+                                <div class="px-2 rounded mt-2 date">
+                                    <p>Updated at : <strong>{{ user.updatedat }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}<br>
+                {% else %}
+                <h3>No results found</h3>
+                {% endif %}
+                {% endif %}
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <footer >
+        <div class="container">
+            <p>&copy; NET Friends. Amplify Your Influence.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+    <script>
+        $('.follow-button').click(function(event) {
+                event.preventDefault();
+                var button = $(this);
+                var userId = button.data('userid');
+                
+                $.ajax({
+                    url: "{{ url_for('ajax_follow') }}",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ userid: userId }),
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            if (button.text() === "Follow") {
+                                button.text("Following");
+                                button.addClass('btn-following');
+                                $('.follow-button[data-userid="' + userId + '"]').text("Following").addClass('btn-following');
+                            } else {
+                                button.text("Follow");
+                                button.removeClass('btn-following');
+                                $('.follow-button[data-userid="' + userId + '"]').text("Follow").removeClass('btn-following');
+                            }
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert("An error occurred. Please try again.");
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

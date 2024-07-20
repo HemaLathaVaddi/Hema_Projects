@@ -1,0 +1,146 @@
+*{
+    margin: 0 ;
+    padding: 0 auto;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgba(252, 168, 119, 0.999);
+    width:100%;
+}
+
+#sdw { 
+    text-shadow: 2px 2px 2px rgb(60, 55, 55); 
+}
+
+.sidebar { 
+    min-height: 100vh;
+    position: fixed; 
+    background-image: linear-gradient(#fff,rgb(6, 219, 243),rgb(6, 101, 243));
+    padding-top: 20px; 
+    position: fixed
+}
+
+.sidebar .nav-link { 
+    color: black; 
+    font-size: 1.1em; 
+}
+
+.sidebar .nav-link.active, 
+.sidebar .nav-link:hover { 
+    color: #fff; 
+    background-color: #007bff; 
+    border-radius: 5px; 
+}
+
+.main-content {
+    width: 80%;
+    margin-left: 250px; 
+    padding: 20px; 
+    margin-bottom: 50px;
+    background-image: radial-gradient();
+}
+
+h1 { 
+    color: #007bff; 
+    font-family: 'Arial', sans-serif; 
+    font-weight: bold; 
+    text-shadow: 2px 2px 4px #aaaaaa; 
+}
+
+.col-md-4 { 
+    padding-top: 100px; 
+}
+
+.btn-primary:hover { 
+    background-color: #0056b3; 
+}
+
+#post { 
+    background-color: #eeaefb; 
+    box-shadow: 3px 3px 3px 3px inset rgb(248, 127, 248); 
+}
+
+#post:active { 
+    background-color: #f6f5f6; 
+}
+
+footer { 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    background-image: linear-gradient(to bottom right,rgb(3, 79, 193),rgb(46, 111, 207),rgb(147, 246, 244),#fff);  
+}
+
+.card {
+    width: 450px;
+    background-color: #fcdd81;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.image img {
+    transition: all 0.5s;
+}
+
+.card:hover .image img {
+    transform: scale(1.5);
+}
+
+
+
+.btn-secondary {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+}
+
+.pagination a:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .disabled a {
+    color: #6c757d;
+}
+
+.header{
+    padding: 25px;
+    background: url(../static/uploads/bg.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+

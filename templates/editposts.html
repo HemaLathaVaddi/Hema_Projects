@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>EditPost</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- <style> (Keep the commented style block if needed) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('.requires-validation');
+            
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                
+                form.classList.add('was-validated');
+            }, false);
+        }, false);
+    </script>
+</head>
+<body>
+    <div style="padding-top: 130px;">
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; top: 0; width: 100%; z-index: 9999;">
+            <p><img src="../static/uploads/logo.png" style="height: 100px;width:170px;"><span id="sdw" style="color: rgba(171, 234, 175, 0.973); font-size: 40px;"> <b>NET FRIENDS</b></span></p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="nav" class="col-md-3 col-lg-2 d-md-block sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('Profile') }}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('posts', page=1) }}">Newsfeed</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('myposts') }}">Post Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_templates') }}">Search user</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_template') }}">Search post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <h1 class="text-center mt-2">Edit Post</h1>
+                <div class="container mt-7 mb-7 p-1 d-flex justify-content-center">
+                    <div class="form-content">
+                        <div class="form-items">
+                            <h3>Post Today</h3>
+                            <form action="{{ url_for('editposts', id=post.postid) }}" method="post" enctype="multipart/form-data" class="requires-validation" novalidate>
+                                <div class="col-md-12">
+                                   <input class="form-control" type="text" name="content" placeholder="Enter your Text" value="{{ post.content }}" required>
+                                   <div class="valid-feedback">Text field is valid!</div>
+                                   <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <textarea class="form-control" type="text" name="feed" rows="4" placeholder="Enter your content" required>{{ post.feed }}</textarea>
+                                    <div class="valid-feedback">Text field is valid!</div>
+                                    <div class="invalid-feedback">Text field cannot be blank!</div>
+                                </div><br>
+                                <div class="col-md-12">
+                                    <input class="form-control" type="file" name="media" placeholder="Upload">
+                                </div>
+                                <div class="form-button mt-3">
+                                  <button id="submit" type="submit" class="btn btn-primary btn-success">Edit Post</button>
+                              </div>
+                              <div class="px-2 rounded mt-2 date">
+                                <p>Created at</p>
+                                <span class="join">{{ post[3] }}</span>
+                            </div>
+                            <div class="px-2 rounded mt-2 date">
+                                <p>Updated at</p>
+                                <span class="join">{{ post[4] }}</span>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+            </main>
+        </div>
+    </div>
+
+    <footer >
+        <div class="container">
+            <p>&copy; NET Friends. Amplify Your Influence.</p>
+        </div>
+    </footer>
+</body>
+</html>
