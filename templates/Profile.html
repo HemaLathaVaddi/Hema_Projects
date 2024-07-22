@@ -26,107 +26,104 @@
 </head>
 <body>
     <div style="padding-top: 130px;">
-        <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; top: 0; width: 100%; z-index: 9999;">
-            <p><img src="../static/uploads/logo.png" style="height: 100px;width:170px;"><span id="sdw" style="color: rgba(171, 234, 175, 0.973); font-size: 40px;"> <b>NET FRIENDS</b></span></p>
+        <!-- header -->
+        <div style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: fixed; top: 0; width: 100%;
+            background-color: #182554;
+            z-index: 9999;
+          " class="navlinks">
+            <a href="#" class="links">
+                <img src="../static/uploads/logo.jpg" style="height: 100px;width:170px;">
+                <span style="color: greenyellow ; font-size: 40px;"> Vertex Institute</span>
+            </a>
         </div>
+        <!-- header -->
     </div>
 
     <div class="container-fluid">
         <div class="row">
-            <nav id="nav" class="col-md-3 col-lg-2 d-md-block sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('Profile') }}">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('posts', page=1) }}">Newsfeed</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('myposts') }}">Post Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_templates') }}">Search user</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_template') }}">Search post</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
-                </ul>
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('add_course') }}">Add Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('add_topic') }}">Add Topics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('add_subtopic') }}">Add Subtopics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('add_faculty') }}">Add Faculty</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('feedback_display') }}">Feedbacks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('enroll_display') }}">Enrollments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
-                <h1 class="text-center mt-4">Welcome to Net Friends {{ user.username }}</h1>
-                <h2 class="text-center mt-4">Profile</h2>
-                <div class="container mt-4 mb-4 p-2 d-flex justify-content-center">
-                    <div class="card p-4">
-                        <div class="image d-flex flex-column justify-content-center align-items-center">
-                            <button class="btn btn-secondary">
-                                {% if user.photo %}
-                                    <img src="{{ url_for('static', filename='uploads/' + user.photo.split('/')[-1]) }}" alt="image" height="100" width="100" />
-                                {% else %}
-                                    <img src="{{ url_for('static', filename='uploads/download (7).jpeg') }}" alt="default image" height="100" width="100" />
-                                {% endif %}
-                            </button>
-                            <h3 class="name  mt-3">{{ user.username }}</h3>
-                            <span class="idd">@{{ user.Email }}</span>
-                            <div class="d-flex flex-row justify-content-center align-items-center gap-2">
-                                <span class="idd1"><strong>{{ user.text }}</strong></span> <span><i class="fa fa-copy"></i></span>
-                            </div>
-                            <div class="d-flex flex-row justify-content-center align-items-center mt-3">
-                                <span class="number">{{ user.followers }} <span class="follow">Followers</span><p>{{ user.follower_names}}</p>
-                            </div>
-                            <div class="d-flex mt-2">
-                                <button class="btn1 btn-primary"><a style="color:white" class="nav-item nav-link" href="{{ url_for('editprofile', id=session['userid']) }}">Edit Profile</a></button>
-                            </div>
-                            <div class="px-2 rounded mt-3 date">
-                                <p>Created at : <strong>{{ user.createdat }}</strong></p>
-                            </div>
-                            <div class="px-2 rounded mt-3 date">
-                                <p>Updated at : <strong>{{ user.updatedat }}</strong></p>
-                            </div>
+                <h1 class="text-center mt-4">Welcome to The Dashboard</h1>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-4">>
+                            <h2>Courses</h2>
+                            <p>{{ courses_count }} </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="dashboard-box faculty" onclick="location.href='{{ url_for('faculty_display') }}'">
+                            <h2>Faculty</h2>
+                            <p>{{ faculty_count }} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="dashboard-box feedback" onclick="location.href='{{ url_for('feedback_display') }}'">
+                            <h2>Feedback</h2>
+                            <p>{{ feedback_count }} </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="dashboard-box enroll" onclick="location.href='{{ url_for('enroll_display') }}'">
+                            <h2>Enrollment</h2>
+                            <p>{{ enroll_count }} </p>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-
-    <footer >
+    <!-- Footer -->
+    <footer class="text-center mt-5" style="background-color: #182554; color: white; padding: 10px 0;">
         <div class="container">
-            <p>&copy; NET Friends. Amplify Your Influence.</p>
+            <p>&copy; 2024 Vertex Software. All rights reserved.</p>
+            <p>
+                <a href="#" style="color: #cfd8dc; text-decoration: none;">Privacy Policy</a> |
+                <a href="#" style="color: #cfd8dc; text-decoration: none;">Terms of Service</a> |
+                <a href="#" style="color: #cfd8dc; text-decoration: none;">Contact Us</a>
+            </p>
         </div>
     </footer>
-    <script>
-        $(document).ready(function() {
-            $('.follow-button').click(function(event) {
-                event.preventDefault();
-                var button = $(this);
-                var userId = button.data('userid');
-                
-                $.ajax({
-                    url: "{{ url_for('ajax_follow') }}",
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ userid: userId }),
-                    success: function(response) {
-                        if (response.status == 'success') {
-                            if (button.text() === "Follow") {
-                                button.text("Following");
-                                button.addClass("btn-following");
-                            } else {
-                                button.text("Follow");
-                                button.removeClass("btn-following");
-                            }
-                            // Load posts by the followed user
-                            window.location.href = "{{ url_for('posts') }}?userid=" + userId;
-                        } else {
-                            alert(response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                        alert("An error occurred. Please try again.");
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- End of Footer -->
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
-
 </body>
 </html>
